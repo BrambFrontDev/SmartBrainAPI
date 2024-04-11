@@ -17,11 +17,13 @@ const image = require('./controllers/image');
 const db = knex({
     client: 'pg',
     connection: {
-      host: '127.0.0.1',
-      port: 5432,
-      user: 'postgres',
-      password: 'test',
-      database: 'smart-brain',
+        connectionString : process.env.DATABASE_URL,
+        ssl: { rejectUnauthorized: false },
+        host: process.env.DATABASE_HOST,
+        port: 5432,
+        user: process.env.DATABASE_USER,
+        password: process.env.DATABASE_PW,
+        database: process.env.DATABASE_DB,
     },
 });
 
@@ -43,9 +45,7 @@ app.use(cors());
 // Definiamo ogni route per ogni richiesta, req: richiesta HTTP in arrivo dal client al server
 // res: risposta HTTP che il server invia al client in risposta alla richiesta.
 // db: database, bcrypt per la cittografia passwords.
-app.get('/', (req, res) => {
-    res.send('success');
-})
+app.get('/', (req, res) => { res.send('it is working') })
 
 app.post('/signin', (req, res) => { signin.handleSignin(req, res, db, bcrypt) })
 
