@@ -2,7 +2,7 @@ const axios = require('axios')
 
 const handleApiCall = (req, res) => {
     const IMAGE_URL = req.body.input;
-    const PAT = '7170af8c418b4968b80384009d6df2a5';
+    const PAT =  process.env.API_CLARIFAI; 
     // Specify the correct user_id/app_id pairings
     // Since you're making inferences outside your app's scope
     const USER_ID = 'clarifai';
