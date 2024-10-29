@@ -31,7 +31,13 @@ const db = knex({
 //Root
 const app = express();
 
-
+db.raw('SELECT 1')
+    .then(() => {
+        console.log('Connessione al database avvenuta con successo!');
+    })
+    .catch((err) => {
+        console.error('Errore di connessione al database:', err);
+    });
 //analizza il corpo della richiesta HTTP, che potrebbe contenere dati in formato JSON,
 //e li trasforma in oggetti JavaScript che possono essere manipolati all'interno dell'applicazione Node.js.
 app.use(bodyParser.json());
